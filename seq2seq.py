@@ -19,6 +19,13 @@ target_characters = set()
 with open(data_path, 'r', encoding='utf-8') as f:
     lines = f.read().split('\n')
 for line in lines[: min(num_samples, len(lines) - 1)]:
+    line = line.replace("\t","")
+    #print(line)
+    l = len(line) // 2
+    first = line[:l] + "\t"
+    last = line[l:]
+    line = first + last
+
     input_text, target_text = line.split('\t')
     # We use "tab" as the "start sequence" character
     # for the targets, and "\n" as "end sequence" character.
