@@ -1,7 +1,7 @@
 from __future__ import print_function
 
 from keras.models import Model, Sequential
-from keras.layers import Embedding, Dense, Input, RepeatVector, TimeDistributed, concatenate, Merge, add, Dropout
+from keras.layers import Embedding, Dense, Input, RepeatVector, TimeDistributed, concatenate, add, Dropout
 from keras.layers.recurrent import LSTM
 from keras.preprocessing.sequence import pad_sequences
 from keras.callbacks import ModelCheckpoint
@@ -129,7 +129,7 @@ class OneShotRNN(object):
         if epochs is None:
             epochs = DEFAULT_EPOCHS
         if model_dir_path is None:
-            model_dir_path = './models'
+            model_dir_path = './demo/models'
         if batch_size is None:
             batch_size = DEFAULT_BATCH_SIZE
 
@@ -319,7 +319,7 @@ class RecursiveRNN1(object):
         if epochs is None:
             epochs = DEFAULT_EPOCHS
         if model_dir_path is None:
-            model_dir_path = './models'
+            model_dir_path = './demo/models'
         if batch_size is None:
             batch_size = DEFAULT_BATCH_SIZE
 
@@ -530,7 +530,7 @@ class RecursiveRNN2(object):
         if epochs is None:
             epochs = DEFAULT_EPOCHS
         if model_dir_path is None:
-            model_dir_path = './models'
+            model_dir_path = './demo/models'
         if batch_size is None:
             batch_size = DEFAULT_BATCH_SIZE
 
@@ -737,7 +737,7 @@ class RecursiveRNN3(object):
         if epochs is None:
             epochs = DEFAULT_EPOCHS
         if model_dir_path is None:
-            model_dir_path = './models'
+            model_dir_path = './demo/models'
         if batch_size is None:
             batch_size = DEFAULT_BATCH_SIZE
 
