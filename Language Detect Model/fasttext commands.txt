@@ -1,0 +1,5 @@
+iftekhar@iftekharHP:		$ ls -lsrh 
+iftekhar@iftekharHP:~/amiebot/Myworkplace$ fasttext test langdetect.ftz test_nihongo.txt 
+iftekhar@iftekharHP:~/amiebot/Myworkplace$ fasttext test langdetect.ftz valid.txt
+iftekhar@iftekharHP:~/amiebot/Myworkplace$ fasttext test langdetect.bin valid.txt
+
