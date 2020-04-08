@@ -1,4 +1,4 @@
-import MeCab 
+import MeCab
 import pandas as pd
 import re
 import random
@@ -6,9 +6,19 @@ from pathlib import Path
 
 mecab = MeCab.Tagger('-Owakati')
 
+def making_query_collection(query):
+    query_parts = query.split()
+    question_parts = []
+    for i in range(len(query_parts)):
+        if len(query_parts)-1 > i:
+            question_parts.append(query_parts[i]+" "+query_parts[i+1])
+            if len(query_parts)-2 > i:
+                question_parts.append(query_parts[i]+" "+query_parts[i+1]+" "+query_parts[i+2])
+    return question_parts
+
 def question_dataframe_generator_1000(dataset, sample_size):
     dataset = dataset.sample(frac=1)
-    
+
     question_saver = []
     PageID_saver = []
     count = 0
@@ -32,13 +42,13 @@ def make_question_from_sentence(sentence):
     question_delimiter = random.choice(get_questions_delimiter_ja())
     item_list.append(question_delimiter)
     question = ' '.join(item_list)
-    
+
     return question
 
 
 def get_questions_delimiter_ja():
     questions_word = []
-    questions_word_file = Path("/home/iftekhar/AI-system/JPBERT/questions_delimiter.txt")
+    questions_word_file = Path("/home/iftekhar/myworkplace/AI-system/JPBERT/questions_delimiter.txt")
     with open(questions_word_file, encoding='utf-8') as f:
         questions_word_list = f.read().splitlines()
     return questions_word_list
@@ -65,7 +75,7 @@ def make_question(split_lines_corpus):
 
             if re.search(r'\w+', sent):
                 #content = mecab_tokenizer.wakati_base_form(sent)
-                
+
                 item_list = []
                 content = mecab.parse(sent).strip("\n").rstrip()
                 item_list = content.split()
@@ -115,4 +125,3 @@ def split_lines_corpus(per_page_corpus):
         whole_corpus.append(corpus_list)
         corpus_list = []
     return whole_corpus
-

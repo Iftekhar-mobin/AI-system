@@ -6,6 +6,8 @@ import re
 import pickle
 import pandas as pd
 #from nltk.tokenize import word_tokenize
+from make_question import making_query_collection
+from itertools import groupby
 
 def corpus_per_page(corpus_name):
     total_pages = corpus_name.PageID.unique()
@@ -151,15 +153,15 @@ def rank_list_collection(result_collection, dataset):
     return rank_list
 
 def get_unique_2Dlist(rank_list_2D):
-    unique_list = []
-    unique_set = set()
-    for item in rank_list_2D:
-        if item[1] not in unique_set:
-            unique_set.add(item[1])
-            unique_list.append(item)
-        else:
-            pass
-    return unique_list
+    lists = sorted(rank_list_2D) # Necessary step to use groupby
+    grouped_list = groupby(lists, lambda x: x[0])
+    grouped_list = [(x[0], [k[1] for k in list(x[1])]) for x in grouped_list]
+
+    sorted_list = []
+    for ids, sentences in grouped_list:
+        sorted_list.append([ids, list(set(sentences))])
+ 
+    return sorted_list
 
 def sequence_matcher(sequence1, sequence2):
     matcher = difflib.SequenceMatcher(None, sequence1, sequence2)
@@ -287,16 +289,6 @@ def get_score_details_record(dataset, questions_samples, vectorizer, vector,
 
     return score
 
-def making_query_collection(query):
-    query_parts = query.split()
-    question_parts = []
-    for i in range(len(query_parts)):
-        if len(query_parts)-1 > i:
-            question_parts.append(query_parts[i]+" "+query_parts[i+1])
-            if len(query_parts)-2 > i:
-                question_parts.append(query_parts[i]+" "+query_parts[i+1]+" "+query_parts[i+2])
-    return question_parts
-
 def sequence_searcher(corpus_per_page, question_parts):
     collector = []
     for index, col in corpus_per_page.iterrows():
@@ -304,6 +296,7 @@ def sequence_searcher(corpus_per_page, question_parts):
              if re.search(items, col['Data']):
                 collector.append(col['PageID'])
     collector = list(set(collector))
+    print("Debug for Collector: ", collector)
     return collector
 
 def page_text_split(page_text):
@@ -320,8 +313,8 @@ def converting_vector(collectors, vectorizer, dataset):
     for ids in collectors:
         temp = dataset[dataset.PageID == str(ids)].Data.values
         temp_list = ' '.join(temp.tolist())
-        #text_collections += [temp_list]
-        text_collections += page_text_split(temp_list)
+        text_collections += [temp_list]
+        #text_collections += page_text_split(temp_list)
         ids_list.append(ids)
     vec = vectorizer.fit(text_collections)
     return vec, text_collections, ids_list
@@ -334,21 +327,21 @@ def seq_countvec_main(questions_samples, corpus_per_page, vectorizer, dataset):
         query = str(col['Question'])
         question_parts = making_query_collection(query)
         collector = sequence_searcher(corpus_per_page, question_parts)
-        vec, text_collections, ids_list = converting_vector(collector, vectorizer, dataset)
-        rank_list = ranking_result_collection(query, text_collections, ids_list, vec)
-
-        page_answers = []
-        prediction_scores = []
-        for ids, score in rank_list:
-            page_answers.append(ids)
-            prediction_scores.append(score)
-        MRR_score = mean_reciprocal_rank_score(col['PageID'], page_answers)
-        sum_score += MRR_score
-        container.append([MRR_score, col['PageID'], page_answers, prediction_scores, col['Question']])
-        sample_count += 1
-
-    result = pd.DataFrame(container, columns=['score', 'actual_answer',
-    'page_answers', 'prediction_scores', 'query'])
-    result.to_csv('seq_CountTFIDFVectorizer_performance.csv')
-    score = sum_score/sample_count
+    #     vec, text_collections, ids_list = converting_vector(collector, vectorizer, dataset)
+    #     rank_list = ranking_result_collection(query, text_collections, ids_list, vec)
+    #
+    #     page_answers = []
+    #     prediction_scores = []
+    #     for ids, score in rank_list:
+    #         page_answers.append(ids)
+    #         prediction_scores.append(score)
+    #     MRR_score = mean_reciprocal_rank_score(col['PageID'], page_answers)
+    #     sum_score += MRR_score
+    #     container.append([MRR_score, col['PageID'], page_answers, prediction_scores, col['Question']])
+    #     sample_count += 1
+    #
+    # result = pd.DataFrame(container, columns=['score', 'actual_answer',
+    # 'page_answers', 'prediction_scores', 'query'])
+    # result.to_csv('seq_CountTFIDFVectorizer_performance.csv')
+    # score = sum_score/sample_count
     return score
