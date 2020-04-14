@@ -7,19 +7,7 @@ import pickle
 import pandas as pd
 #from nltk.tokenize import word_tokenize
 from make_question import making_query_collection
-from itertools import groupby
 
-def corpus_per_page(corpus_name):
-    total_pages = corpus_name.PageID.unique()
-    data_collector = []
-    PageID_collector = []
-    for i in list(total_pages):
-        page_data = corpus_name[corpus_name.PageID == i].Data.values
-        data = ' '.join(list(page_data))
-        data_collector.append(data)
-        PageID_collector.append(i)
-    df = pd.DataFrame(zip(data_collector, PageID_collector), columns=["Data", "PageID"])
-    return df
 
 def build_voc(dataset):
     corpus_text = ' '.join(dataset.Data)
@@ -54,26 +42,7 @@ def custom_vectorizer(input_list, word_ids):
                 break
     return collector
 
-def clean_text(text):
-    replaced_text = re.sub(r'￥', '', text)       # 【】の除去
-    replaced_text = re.sub(r'．', '', replaced_text)       # ・ の除去
-    replaced_text = re.sub(r'｣', '', replaced_text)     # （）の除去
-    replaced_text = re.sub(r'｢', '', replaced_text)   # ［］の除去
-    replaced_text = re.sub(r'～', '', replaced_text)  # メンションの除去
-    replaced_text = re.sub(r'｜', '', replaced_text)  # URLの除去
-    replaced_text = re.sub(r'＠', '', replaced_text)  # 全角空白の除去
-    replaced_text = re.sub(r'？', '', replaced_text) # 数字の除去
-    replaced_text = re.sub(r'％', '', replaced_text)
-    replaced_text = re.sub(r'＝', '', replaced_text)
-    replaced_text = re.sub(r'！', '', replaced_text)
-    replaced_text = re.sub(r'｝', '', replaced_text)
-    replaced_text = re.sub(r'：', '', replaced_text)
-    replaced_text = re.sub(r'－', '', replaced_text)
-    replaced_text = re.sub(r'･', '', replaced_text)
-    replaced_text = re.sub(r'ｔ', '', replaced_text)
-    replaced_text = re.sub(r'ｋ', '', replaced_text)
-    replaced_text = re.sub(r'ｄ', '', replaced_text)
-    return replaced_text
+
 
 def return_match_length(list_a, list_b):
     a = set(list_a)
@@ -82,25 +51,6 @@ def return_match_length(list_a, list_b):
     not_matched = [x for sublist in saver for x in sublist]
     matched = [items for items in list_a+list_b if items not in not_matched]
     return len(matched)
-
-def mean_reciprocal_rank_score(actual_value, predicted_values):
-    pos = 0
-    val = 0
-    for i in predicted_values:
-        if i == actual_value and pos == 0:
-            val = 1
-            break
-        elif i == actual_value and pos == 1:
-            val = 0.5
-            break
-        elif i == actual_value and pos == 2:
-            val = 0.33
-            break
-        else:
-            val = 0
-        pos += 1
-
-    return val
 
 def ranking_result_collection(query, text_collections, ids_list, vec):
     X = vec.transform([str(query)])
@@ -152,25 +102,7 @@ def rank_list_collection(result_collection, dataset):
     rank_list.sort(reverse=True)
     return rank_list
 
-def get_unique_2Dlist(rank_list_2D):
-    lists = sorted(rank_list_2D) # Necessary step to use groupby
-    grouped_list = groupby(lists, lambda x: x[0])
-    grouped_list = [(x[0], [k[1] for k in list(x[1])]) for x in grouped_list]
 
-    sorted_list = []
-    for ids, sentences in grouped_list:
-        sorted_list.append([ids, list(set(sentences))])
- 
-    return sorted_list
-
-def sequence_matcher(sequence1, sequence2):
-    matcher = difflib.SequenceMatcher(None, sequence1, sequence2)
-    matches = matcher.get_matching_blocks()
-    matching_result_collection = []
-    for match in matches:
-        if len(sequence1[match.a:match.a + match.size]) > 0:
-            matching_result_collection.append(sequence1[match.a:match.a + match.size])
-    return matching_result_collection
 
 def sequence_wise_ranking(match_list_collection):
     adder = 0
@@ -288,22 +220,6 @@ def get_score_details_record(dataset, questions_samples, vectorizer, vector,
     score = sum_score / sample_count
 
     return score
-
-def sequence_searcher(corpus_per_page, question_parts):
-    collector = []
-    for index, col in corpus_per_page.iterrows():
-        for items in question_parts:
-             if re.search(items, col['Data']):
-                collector.append(col['PageID'])
-    collector = list(set(collector))
-    print("Debug for Collector: ", collector)
-    return collector
-
-def page_text_split(page_text):
-    word_limit = 100
-    page_text = page_text.split()
-    chunks = [' '.join(page_text[i:i + word_limit]) for i in range(0, len(page_text), word_limit)]
-    return chunks
 
 ###################  For Seq_CountVectorizer ##########################
 
