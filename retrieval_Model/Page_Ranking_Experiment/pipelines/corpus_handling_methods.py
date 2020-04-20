@@ -82,3 +82,22 @@ def query_parsing(query):
     query_list = [items for items in query_list if items not in question_maker.get_questions_delimiter_ja()]
     query_text = ' '.join(query_list)
     return query_text
+
+def deep_clean(matched_sequence):
+    rank = []
+    collector = []
+    ids_list = []
+    for ids, items in matched_sequence:
+        for sentences in items:
+            clean_sentence = []
+            for items in ''.join(sentences).split():
+                if len(items) < 2:
+                    items = re.sub(r'[ぁ-ん]', '', items)
+                    items = re.sub(r'[ア-ン]', '', items)
+                    items = re.sub(r'[A-Za-z]', '', items)
+                    clean_sentence.append(items)
+                else:
+                    clean_sentence.append(items)
+            cleaned_text = [cleaned for cleaned in clean_sentence if cleaned not in ['']]
+            collector.append([ids, ' '.join(cleaned_text)])
+    return collector
