@@ -48,7 +48,7 @@ def make_question_from_sentence(sentence):
 
 def get_questions_delimiter_ja():
     questions_word = []
-    questions_word_file = Path("/home/iftekhar/myworkplace/AI-system/JPBERT/questions_delimiter.txt")
+    questions_word_file = Path("/home/iftekhar/myworkplace/AI-system/retrieval_Model/BERTVectorizer/JPBERT/questions_delimiter.txt")
     with open(questions_word_file, encoding='utf-8') as f:
         questions_word_list = f.read().splitlines()
     return questions_word_list
