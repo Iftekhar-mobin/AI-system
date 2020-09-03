@@ -152,9 +152,9 @@ class Predictor:
         return self.generate_sentence(query)
 
 
-obj = Predictor('/home/iftekhar/AI-system/Experiment/data')
-
-print(reply_generate(obj.sequence_frequency_dict(), ['could', 'please', 'provide', 'payment']))
+# obj = Predictor('/home/iftekhar/AI-system/Experiment/data')
+#
+# print(reply_generate(obj.sequence_frequency_dict(), ['could', 'please', 'provide', 'payment']))
 
 # while True:
 #     q = input('Do have any Query?\n')

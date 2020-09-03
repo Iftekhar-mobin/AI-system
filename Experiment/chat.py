@@ -1,6 +1,7 @@
-# from predictor.predict import Predictor
+from predictor.predict import Predictor
 from flask import Flask, request, render_template
 from faq.faq_chatter import FaqBot
+from preprocessor import text_preprocessing
 # from chatterbot import ChatBot
 # from chatterbot.trainers import ChatterBotCorpusTrainer
 # from chatterbot.trainers import ListTrainer
@@ -31,9 +32,24 @@ def index():
     return render_template('index.html')
 
 
-# @app.route('/home')
-# def index():
-#     return render_template('home.html')
+@app.route('/predict', methods=['POST', 'GET'])
+def predict():
+    request_param = request.form
+    query = request_param['query']
+    obj = Predictor('/home/iftekhar/AI-system/Experiment/data')
+    out1 = obj.driver(text_preprocessing.text_processing(query))
+    out2 = obj.predict_sentence(text_preprocessing.text_processing(query))
+
+    collector = []
+    if out1:
+        collector += out1
+    if out2:
+        if len(out2) > 1 or out2[0].lower() != query.lower():
+            collector += out2
+    if collector:
+        return json.dumps(collector)
+    else:
+        return ''
 
 
 @app.route('/process', methods=['POST', 'GET'])
