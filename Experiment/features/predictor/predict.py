@@ -1,11 +1,6 @@
 from nltk import word_tokenize
-from preprocessor.processor import Preprocessor
-from constants.fixed_names import PROCESSED_TEXTS_FILE, NLU_FILE_EN, NLU_DATA_DIR, CORPUS_DIR
-from preprocessor import text_preprocessing
-from loader import reader_writer
+from helpers.loader import reader_writer
 from collections import defaultdict, Counter
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
 from nltk.util import ngrams
 import re
 import random

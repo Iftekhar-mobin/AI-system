@@ -4,8 +4,8 @@ import _pickle as pickle
 import pandas as pd
 import os
 import re
-from Tag_recommender.methods import sequencer
-from constants.fixed_names import RETRIEVER_WORD_DIC, PROCESSED_TEXTS_FILE, VOCAB_FILE, DEEP_CLEAN_DATA_FILE
+from features.Tag_recommender.methods import sequencer
+from helpers.constants.fixed_names import RETRIEVER_WORD_DIC, PROCESSED_TEXTS_FILE, VOCAB_FILE, DEEP_CLEAN_DATA_FILE
 from collections import OrderedDict
 nltk.download('wordnet')
 nltk.download('omw')

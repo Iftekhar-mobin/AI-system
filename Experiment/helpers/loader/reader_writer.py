@@ -1,7 +1,7 @@
 from pathlib import Path
 from os import path
-from preprocessor import text_preprocessing
-from constants.fixed_names import NLU_DICT, NLU_DATA_DIR, CORPUS_DIR, PROCESSED_TEXTS_FILE
+from helpers.preprocessor import text_preprocessing
+from helpers.constants.fixed_names import NLU_DICT, CORPUS_DIR, PROCESSED_TEXTS_FILE
 import json
 import ast
 

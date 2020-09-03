@@ -1,7 +1,7 @@
-from predictor.predict import Predictor
+from features.predictor.predict import Predictor
 from flask import Flask, request, render_template
 from faq.faq_chatter import FaqBot
-from preprocessor import text_preprocessing
+from helpers.preprocessor import text_preprocessing
 # from chatterbot import ChatBot
 # from chatterbot.trainers import ChatterBotCorpusTrainer
 # from chatterbot.trainers import ListTrainer

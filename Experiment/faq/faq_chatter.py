@@ -1,8 +1,8 @@
 import random
 # from amie_core.core.tokenizer.stop_words import get_questions_delimiter_ja, get_questions_delimiter_en
-from preprocessor import text_preprocessing
-from loader import reader_writer
-from constants.fixed_names import NLU_DATA_DIR, NLU_FILE_JP, NLU_FILE_EN, REPLY_FILE_EN
+from helpers.preprocessor import text_preprocessing
+from helpers.loader import reader_writer
+from helpers.constants.fixed_names import NLU_DATA_DIR, NLU_FILE_EN, REPLY_FILE_EN
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from collections import Counter

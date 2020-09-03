@@ -2,9 +2,8 @@ from difflib import get_close_matches
 import re
 import os
 from collections import Counter
-from pathlib import Path
 from enchant import DictWithPWL
-from constants.fixed_names import PROCESSED_TEXTS_FILE, DEEP_CLEAN_DATA_FILE, VOCAB_FILE
+from helpers.constants.fixed_names import PROCESSED_TEXTS_FILE, DEEP_CLEAN_DATA_FILE, VOCAB_FILE
 
 
 def load_data(data_dir):
