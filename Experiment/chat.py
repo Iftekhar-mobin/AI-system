@@ -32,6 +32,12 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/process', methods=['POST', 'GET'])
+def process():
+    query = request.args.get('msg')
+    return str(FaqBot().generate_reply(query))
+
+
 @app.route('/predict', methods=['POST', 'GET'])
 def predict():
     request_param = request.form
@@ -52,10 +58,7 @@ def predict():
         return ''
 
 
-@app.route('/process', methods=['POST', 'GET'])
-def process():
-    query = request.args.get('msg')
-    return str(FaqBot().generate_reply(query))
+
 
 
 # @app.route("/process")

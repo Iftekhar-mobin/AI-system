@@ -3,7 +3,7 @@ import re
 import os
 from collections import Counter
 from enchant import DictWithPWL
-from helpers.constants.fixed_names import PROCESSED_TEXTS_FILE, DEEP_CLEAN_DATA_FILE, VOCAB_FILE
+from constants.fixed_names import PROCESSED_TEXTS_FILE, DEEP_CLEAN_DATA_FILE, VOCAB_FILE
 
 
 def load_data(data_dir):
