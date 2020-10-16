@@ -1,0 +1,458 @@
+[{"label": "ORG", "pattern": [{"LOWER": "mobicontrol"}]},
+{"label": "ORG", "pattern": [{"LOWER": "soti"}]},
+{"label": "OPSYS", "pattern": "android"},
+{"label": "OPSYS", "pattern": [{"LOWER": "ios"}]},
+{"label": "OPSYS", "pattern": [{"LOWER": "apple"}]},
+{"label": "OPSYS", "pattern": "windows"},
+{"label": "OPSYS", "pattern": [{"LOWER": "linux"}]},
+{"label": "OPSYS", "pattern": [{"LOWER": "端末"}, {"LOWER": "os"}]},
+{"label": "DOC", "pattern": [{"LOWER": "manual"}]},
+{"label": "CONFIGURATION", "pattern": [{"LOWER": "configuration"}]},
+{"label": "CONFIGURATION", "pattern": [{"LOWER": "config"}]},
+{"label": "CONFIGURATION", "pattern": [{"LOWER": "settings"}]},
+{"label": "CONFIGURATION", "pattern": [{"LOWER": "setup"}]},
+{"label": "RULES", "pattern": "ルール"},
+{"label": "RULES", "pattern": "rule"},
+{"label": "RULES", "pattern": "rules"},
+{"label": "RULES", "pattern": "authentication"},
+{"label": "RULES", "pattern": "filesyncrule"},
+{"label": "ENVIRONMENT", "pattern": "vpn"},
+{"label": "ENVIRONMENT", "pattern": "wifi"},
+{"label": "ENVIRONMENT", "pattern": "pop"},
+{"label": "CONFIGURATION", "pattern": [{"LOWER": "serverproperties"}]},
+{"label": "CONFIGURATION", "pattern": [{"LOWER": "commonsettings"}]},
+{"label": "CONFIGURATION", "pattern": "emailconfig"},
+{"label": "SETTINGS", "pattern": "networkports"},
+{"label": "SETTINGS", "pattern": [{"LOWER": "apns"}, {"LOWER": "certificate"}]},
+{"label": "SETTINGS", "pattern": "apns"},
+{"label": "SETTINGS", "pattern": "ldap"},
+{"label": "SETTINGS", "pattern": "wpc"},
+{"label": "SETTINGS", "pattern": [{"LOWER": "詳細"}, {"LOWER": "設定"}]},
+{"label": "SETTINGS", "pattern": [{"LOWER": "設定"}, {"LOWER": " 項目"}]},
+{"label": "SETTINGS", "pattern": [{"LOWER": "deleting"}, {"LOWER": "device"}]},
+{"label": "SETTINGS", "pattern": [{"LOWER": "prohibit"}, {"LOWER": "deletion"}]},
+{"label": "SETTINGS", "pattern": "構成"},
+{"label": "ACCOUNT", "pattern":  [{"LOWER": "グループ"}]},
+{"label": "CONTACT", "pattern":  [{"LOWER": "contacts"}]},
+{"label": "ACCOUNT", "pattern":  [{"LOWER": "account"}]},
+{"label": "ACCOUNT", "pattern":  "profile"},
+{"label": "ACCOUNT", "pattern":  "loadonprofile"},
+{"label": "ACCOUNT", "pattern":  "bitlocker"},
+{"label": "ACCOUNT", "pattern":  "authentication"},
+{"label": "ACCOUNT", "pattern":  "locationservices"},
+{"label": "RULES", "pattern":  "relocationrule"},
+{"label": "ACCOUNT", "pattern":  "devicesrelocation"},
+{"label": "ACCOUNT", "pattern":  [{"LOWER": "プロファイル"}]},
+{"label": "ACCOUNT", "pattern":  [{"LOWER": "プロファイル"}]}]
+
+端末 を 他 の 端末 グループ 移動 – MobiControl v 14 Manual devicesrelocation 使用しますか,29,
+地理 位置 を 表示 – MobiControl v 14 Manual wpc locationservices どの,100,
+端末 の 移動 ルール – MobiControl 14 Manual wm relocationrule どこですか,131,
+的 位置 を 表示 – MobiControl v 14 Manual wm locationservices 使用しますか,143,
+端末 移動 ルール – MobiControl v 14 Manual plus relocationrule なにで,233,
+地理 的 位置 表示 – MobiControl v 14 Manual plus locationservices 作りたい,250,
+地理 的 位置 を 表示 – MobiControl v 14 ios locationservices 何ができますか,384,
+端末 の 移動 ルール – MobiControl 14 Manual linux relocationrule 作り方は,412,
+
+locationservices
+
+" CONFIGURATION " pattern: ルール
+" Product_Other " pattern: wm expenserule 何
+" Company " pattern: wm sendscript
+" Product_Other " pattern: スクリプト ･ コマンド 一覧
+" Product_Other " pattern: win embedded レポート –
+" Product_Other " pattern: barcode generator
+" Product_Other " pattern: android –
+" Product_Other " pattern: plus agent installation こと
+" Product_Other " pattern: plus settings
+" Product_Other " pattern: android plus プロファイル –
+" Product_Other " pattern: plus antivirus
+" Product_Other " pattern: plus file encryption 何
+" Product_Other " pattern: plus authentication
+" Product_Other " pattern: 無 接続 端末 対策
+" Product_Other " pattern: plus out of
+" Product_Other " pattern: plus certificate
+" Product_Other " pattern: plus application control 何
+" Product_Other " pattern: ファイア ウォール –
+" Product_Other " pattern: plus lockdown どこ
+" Product_Other " pattern: plus lockdown template 何
+" Product_Other " pattern: plus lockdown tags
+" Product_Other " pattern: ランチャー –
+" Product_Other " pattern: plus lockdown speed どこ
+" Product_Other " pattern: plus どの
+" Product_Other " pattern: plus feature control
+" Product_Other " pattern: e メール
+" Product_Other " pattern: plus emailconfig
+" Product_Other " pattern: ms exchange –
+" Product_Other " pattern: plus activesync
+" Product_Other " pattern: imap –
+" Product_Other " pattern: plus imap 何
+" Product_Other " pattern: pop 3 –
+" Product_Other " pattern: plus pop 3
+" Product_Other " pattern: nitrodesk trouchdown –
+" Product_Other " pattern: plus apn
+" Person " pattern: vpn
+" Product_Other " pattern: plus vpn - per - app どう
+" Product_Other " pattern: vpn 設定
+" Person " pattern: plus vpn
+" Product_Other " pattern: plus wifi hotspot
+" Product_Other " pattern: plus wifi
+" Product_Other " pattern: a + –
+" Product_Other " pattern: soti hub –
+" Product_Other " pattern: surf –
+" Product_Other " pattern: plus sotisurf
+" Product_Other " pattern: plus settingsmanager
+" Product_Other " pattern: android enterprise プロファイル –
+" Doctrine_Method_Other " pattern: afw authentication 何
+" Product_Other " pattern: ae
+" Product_Other " pattern: out of contact どっち
+" Product_Other " pattern: 端末 証明 書
+" Product_Other " pattern: web フィルタ –
+" Doctrine_Method_Other " pattern: afw application control
+" Doctrine_Method_Other " pattern: afw browser 何
+" Person " pattern: キシ
+" Doctrine_Method_Other " pattern: afw kiosk template
+" Product_Other " pattern: plus lockdown tags - 2
+" Product_Other " pattern: ランチャー –
+" Person " pattern: afw kiosk speed
+" Product_Other " pattern: afw device feature control
+" Periodx_Other " pattern: afw exchange
+" Doctrine_Method_Other " pattern: afw apn 構築
+" Weapon " pattern: vpn –
+" Person " pattern: afw vpn
+" Doctrine_Method_Other " pattern: afw wifi
+" Doctrine_Method_Other " pattern: アプリ 更新 諾否 –
+" Doctrine_Method_Other " pattern: afw app update 開発
+" Product_Other " pattern: タスクスケジューラ ae –
+" Product_Other " pattern: soti hub –
+" Product_Other " pattern: afw sotihub
+" Product_Other " pattern: soti surf –
+" Doctrine_Method_Other " pattern: afw sotisurf
+" Position_Vocation " pattern: 設定 マネージャー
+" Product_Other " pattern: knox プロファイル –
+" Broadcast_Program " pattern: knox configuration
+" Product_Other " pattern: knox ライセンス
+" Doctrine_Method_Other " pattern: パス コード
+" Product_Other " pattern: ブラックリスト ･ –
+" Product_Other " pattern: pop –
+" Product_Other " pattern: knox pop 3
+" Product_Other " pattern: nitrodesk trouchdown
+" GOE_Other " pattern: vpn
+" Mountain " pattern: vpn
+" Product_Other " pattern: knox splitbilling
+" SETTINGS " pattern: 詳細 設定
+" Product_Other " pattern: plus advancedsettings 何
+" Product_Other " pattern: plus customdata
+" Product_Other " pattern: plus sync
+" Product_Other " pattern: plus remotecontrolsettings 何
+" Product_Other " pattern: plus 始める方法
+" Product_Other " pattern: plus connection period
+" Product_Other " pattern: droid shareddevice どこ
+" Product_Other " pattern: サーバ 群 アクセス 順位
+" Doctrine_Method_Other " pattern: deploy servers
+" Product_Other " pattern: plus support contacts
+" Product_Other " pattern: plus agentsettings どこ
+" CONFIGURATION " pattern: ルール
+" Product_Other " pattern: plus rules view
+" Product_Other " pattern: 端末 登録 ルール
+" Product_Other " pattern: plus add rule
+" Product_Other " pattern: アプリ ･ カタログ ルール
+" Product_Other " pattern: plus rule
+" Product_Other " pattern: ファイル 同期 ルール
+" Product_Other " pattern: plus filesyncrule
+" Product_Other " pattern: 端末 移動 ルール
+" Product_Other " pattern: plus relocationrule
+" Product_Other " pattern: データ 収集 ルール
+" CONFIGURATION " pattern: ルール
+" Product_Other " pattern: 通信 管理 ルール
+" Product_Other " pattern: plus expenserule
+" Product_Other " pattern: –
+" ACCOUNT " pattern: account
+" CONFIGURATION " pattern: configuration
+" N_Product " pattern: 3 つ
+" Product_Other " pattern: droid securitiesfeatures
+" Corporation_Other " pattern: plus - action どちら
+" Product_Other " pattern: plus remotecontrol
+" Product_Other " pattern: plus sendmsg
+" Product_Other " pattern: plus sendscript
+" Product_Other " pattern: スクリプト ･ コマンド
+" Product_Other " pattern: plus scriptcmd
+" Product_Other " pattern: droid launcher closed 始める方法
+" Product_Other " pattern: plus devices - tab
+" Product_Other " pattern: droid devicepanel 作り方
+" Product_Other " pattern: plus info panel 使い
+" Product_Other " pattern: plus locationservices
+" Product_Other " pattern: android 端末 レポート
+" Product_Other " pattern: plus reportstab
+" Product_Other " pattern: plus agent
+" Product_Other " pattern: owner mode –
+" Product_Other " pattern: afw device setup 何
+" Product_Other " pattern: profile owner mode –
+" Product_Other " pattern: droid barcode generator 何
+" Position_Vocation " pattern: エージェント
+" Product_Other " pattern: droid agentupdate
+" Product_Other " pattern: droid plugin 使う
+" Product_Other " pattern: plus
+" Position_Vocation " pattern: サポート 担当 者
+" Treaty " pattern: support
+" CONTACT " pattern: contacts
+" Product_Other " pattern: チェックイン
+" OPSYS " pattern: ios
+" CONFIGURATION " pattern: settings
+" Product_Other " pattern: ios 構成 プロファイル –
+" OPSYS " pattern: ios
+" Product_Other " pattern: 端末 証明 書
+" OPSYS " pattern: ios
+" Product_Other " pattern: scep
+" OPSYS " pattern: ios
+" Product_Other " pattern: web コンテンツ フィルタ
+" OPSYS " pattern: ios
+" Product_Other " pattern: ios アプリ 制限 –
+" International_Organization " pattern: application
+" Product_Other " pattern: ios シングルアプリモード –
+" OPSYS " pattern: ios
+" Product_Other " pattern: ios シングルサインオン
+" Show " pattern: ios singlesignon どっち
+" OPSYS " pattern: ios
+" Show_Organization " pattern: ios authentication
+" OPSYS " pattern: ios
+" Product_Other " pattern: e メール
+" OPSYS " pattern: ios
+" Product_Other " pattern: ms exchange –
+" OPSYS " pattern: ios
+" OPSYS " pattern: ios
+" Product_Other " pattern: pop 3 –
+" Product_Other " pattern: ios pop 3
+" OPSYS " pattern: ios
+" Company " pattern: caldav
+" OPSYS " pattern: ios
+" OPSYS " pattern: ios
+" Product_Other " pattern: carddav
+" OPSYS " pattern: ios
+" OPSYS " pattern: ios
+" Product_Other " pattern: ios vpn per - app 入れ
+" Show_Organization " pattern: vpn
+" OPSYS " pattern: ios
+" OPSYS " pattern: ios
+" Product_Other " pattern: airprint
+" OPSYS " pattern: ios
+" Product_Other " pattern: web クリップ 表示 –
+" OPSYS " pattern: ios
+" OPSYS " pattern: ios
+" ACCOUNT " pattern: プロファイル
+" OPSYS " pattern: ios
+" OPSYS " pattern: ios
+" Product_Other " pattern: hub –
+" OPSYS " pattern: ios
+" Product_Other " pattern: soti surf –
+" OPSYS " pattern: ios
+" Product_Other " pattern: macos プロファイル –
+" Product_Other " pattern: macu certificate
+" Product_Other " pattern: scep
+" Product_Other " pattern: macu scep
+" Doctrine_Method_Other " pattern: ペア レンタル コントロール
+" Doctrine_Method_Other " pattern: macu parentalcontrol
+" Doctrine_Method_Other " pattern: macu finder
+" Company " pattern: macu authentication
+" Company " pattern: macu device control
+" Position_Vocation " pattern: 設定 アシスタント
+" Product_Other " pattern: settingsassistant
+" Product_Other " pattern: macu emailconfig 何
+" Music " pattern: ms exchange activesync –
+" Product_Other " pattern: macu activesync 開発
+" Company " pattern: macu imap
+" Product_Other " pattern: pop 3
+" Product_Other " pattern: macu pop
+" N_Product " pattern: 3 こと
+" Island " pattern: ldap
+" Person " pattern: macu ldap
+" Product_Other " pattern: カレンダー caldav ) –
+" Product_Other " pattern: macu settingsassistant
+" Province " pattern: carddav
+" Show_Organization " pattern: macu carddav
+" Product_Other " pattern: macu
+" International_Organization " pattern: vpn
+" Product_Other " pattern: macu vpn
+" Show_Organization " pattern: macu
+" Product_Other " pattern: プロキシプロファイル –
+" Plan " pattern: macu wifi
+" Product_Other " pattern: macu airprint 作り方
+" Company " pattern: macu accessibility
+" Product_Other " pattern: スクリーンセーバー
+" Product_Other " pattern: macu dock
+" Product_Other " pattern: macos
+" Product_Other " pattern: macu 何
+" Company " pattern: macu loginitems
+" Product_Other " pattern: プリンタ 設定 –
+" Product_Other " pattern: macu printer
+" Product_Other " pattern: 機能 拡張 –
+" Product_Other " pattern: macu extentions
+" SETTINGS " pattern: 構成
+" ACCOUNT " pattern: プロファイル
+" Show_Organization " pattern: macu
+" Product_Other " pattern: macu manageddomains
+" Product_Other " pattern: デバイス プロファイル –
+" Product_Other " pattern: filevault –
+" Person " pattern: macd certificate
+" Product_Other " pattern: scep
+" Product_Other " pattern: macd scep
+" Product_Other " pattern: 機能 拡張 –
+" Product_Other " pattern: macd kernelextention
+" International_Organization " pattern: macd
+" Position_Vocation " pattern: ペア レンタル
+" Product_Other " pattern: macd parentalcontrol 作り方
+" Product_Other " pattern: ファイア ウォール –
+" Product_Other " pattern: macd firewall
+" Product_Other " pattern: finder –
+" Company " pattern: macd authentication
+" Product_Other " pattern: macd device feature control こと
+" Position_Vocation " pattern: 設定 アシスタント
+" Product_Other " pattern: macd settingsassistant
+" Product_Other " pattern: airplay 設定 –
+" Person " pattern: macd vpn
+" Music " pattern: macd ethernet
+" Doctrine_Method_Other " pattern: macd directoryservers
+" Product_Other " pattern: macd proxyprofile 何
+" Doctrine_Method_Other " pattern: 無線 lan
+" Plan " pattern: macd wifi 使い始める
+" Company " pattern: airprint
+" Product_Other " pattern: macd airprint
+" Product_Other " pattern: xsan –
+" Product_Other " pattern: アップデート サーバ
+" Product_Other " pattern: machine サーバ –
+" Product_Other " pattern: macd timemachine 構築
+" Product_Other " pattern: スクリーンセーバー –
+" Music " pattern: macd wallpaper 何
+" Product_Other " pattern: dock –
+" Product_Other " pattern: macd printer
+" Doctrine_Method_Other " pattern: macd extentions
+" SETTINGS " pattern: 構成
+" ACCOUNT " pattern: プロファイル
+" Show_Organization " pattern: macd configprofile
+" Mountain " pattern: macd manageddomains
+" OPSYS " pattern: ios
+" OPSYS " pattern: ios
+" Show_Organization " pattern: viewsettings
+" OPSYS " pattern: ios
+" OPSYS " pattern: ios
+" Company " pattern: ios deploy servers priorities
+" OPSYS " pattern: ios
+" Product_Other " pattern: activation lock 作り方
+" Product_Other " pattern: bluetooth
+" OPSYS " pattern: ios
+" OPSYS " pattern: ios
+" CONFIGURATION " pattern: ルール
+" OPSYS " pattern: ios
+" CONFIGURATION " pattern: rules
+" Product_Other " pattern: 端末 登録 ルール
+" Doctrine_Method_Other " pattern: ios rule
+" CONFIGURATION " pattern: ルール
+" OPSYS " pattern: ios
+" Person " pattern: vpp トー
+" OPSYS " pattern: ios
+" CONFIGURATION " pattern: ルール
+" OPSYS " pattern: ios
+" Product_Other " pattern: データ 収集 ルール
+" OPSYS " pattern: ios
+" CONFIGURATION " pattern: ルール
+" OPSYS " pattern: ios
+" Product_Other " pattern: 通信 費 管理 ルール
+" OPSYS " pattern: ios
+" Product_Other " pattern: sdk for ios –
+" OPSYS " pattern: ios
+" OPSYS " pattern: ios
+" Country " pattern: - action
+" Product_Other " pattern: remoteview
+" OPSYS " pattern: ios
+" OPSYS " pattern: ios
+" Product_Other " pattern: macos コンピュータ 働きかける –
+" Doctrine_Method_Other " pattern: mac - action
+" OPSYS " pattern: ios
+" OPSYS " pattern: apple
+" OPSYS " pattern: ios
+" OPSYS " pattern: ios
+" Product_Other " pattern: apple 製品 レポート –
+" OPSYS " pattern: ios
+" OPSYS " pattern: ios
+" Doctrine_Method_Other " pattern: 監視 モード
+" Doctrine_Method_Other " pattern: 手動 dep 登録
+" Doctrine_Method_Other " pattern: 自動 dep 登録
+" Product_Other " pattern: dep auto
+" OPSYS " pattern: ios
+" OPSYS " pattern: ios
+" N_Product " pattern: 7 端末
+" Plan " pattern: ios agent installation
+" Product_Other " pattern: macos
+" Product_Other " pattern: abm 担当 者 アカウント
+" Product_Other " pattern: dep account 作り方
+" Product_Other " pattern: ios agent uninstall 開発
+" OPSYS " pattern: ios
+" OPSYS " pattern: ios
+" Product_Other " pattern: スクリプト ･ コマンド 一覧
+" OPSYS " pattern: linux
+" Company " pattern: linux settings
+" SETTINGS " pattern: 構成
+" ACCOUNT " pattern: プロファイル
+" OPSYS " pattern: linux
+" Product_Other " pattern: linux out of contact
+" OPSYS " pattern: linux
+" OPSYS " pattern: linux
+" Product_Other " pattern: タスクスケジューラー –
+" OPSYS " pattern: linux
+" SETTINGS " pattern: 詳細 設定
+" OPSYS " pattern: linux
+" OPSYS " pattern: linux
+" Show_Organization " pattern: time sync
+" OPSYS " pattern: linux
+" Product_Other " pattern: サーバ 群 アクセス 順位
+" Company " pattern: linux deploy servers
+" CONFIGURATION " pattern: ルール
+" Company " pattern: linux rules
+" CONFIGURATION " pattern: ルール
+" OPSYS " pattern: linux
+" CONFIGURATION " pattern: ルール
+" Product_Other " pattern: linux filesyncrule
+" CONFIGURATION " pattern: ルール
+" OPSYS " pattern: linux
+" Product_Other " pattern: データ 収集 ルール
+" OPSYS " pattern: linux
+" CONFIGURATION " pattern: ルール
+" Company " pattern: linux alertrules
+" Company " pattern: linux - action
+" OPSYS " pattern: linux
+" OPSYS " pattern: linux
+" OPSYS " pattern: linux
+" International_Organization " pattern: devices - tab
+" OPSYS " pattern: linux
+" OPSYS " pattern: linux
+" OPSYS " pattern: linux
+" OPSYS " pattern: linux
+" CONFIGURATION " pattern: setup
+" OPSYS " pattern: ios
+" OPSYS " pattern: windows
+" Product_Other " pattern: 管理 サーバ
+" Company " pattern: serverproperties
+" Product_Other " pattern: apns 証明 書
+" Product_Other " pattern: apns certificate
+" Product_Other " pattern: ldap 接続 プロファイル
+" Company " pattern: ldap profile
+" ACCOUNT " pattern: プロファイル
+" Doctrine_Method_Other " pattern: ad fs profile 関する情報
+" Product_Other " pattern: abm 担当 者 アカウント 取得 –
+" Occasion_Other " pattern: dep account
+" Product_Other " pattern: apple –
+" OPSYS " pattern: ios
+" Person " pattern: トー クン
+" OPSYS " pattern: ios
+" Music " pattern: –
+" CONFIGURATION " pattern: configuration
+" ACCOUNT " pattern: グループ
+" International_Organization " pattern: loadonprofile
+" Product_Other " pattern: プロファイル ルール 詳細 設定
+" CONFIGURATION " pattern: rules
+" Product_Other " pattern: android 端末
+" Product_Other " pattern: plus overall
+" Product_Other " pattern: erg setup
+" Product_Other " pattern: sdk for –
+" International_Organization " pattern: exchange
+" OPSYS " pattern: 端末 os
