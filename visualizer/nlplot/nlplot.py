@@ -9,7 +9,7 @@ import multiprocessing
 from collections import defaultdict, Counter
 from tqdm import tqdm
 from sklearn import preprocessing
-from helper import is_notebook
+from .helper import is_notebook
 import datetime as datetime
 
 import seaborn as sns
@@ -504,7 +504,11 @@ class CorpusVisualizer:
 
         # create community
         # https://networkx.github.io/documentation/stable/reference/algorithms/community.html#module-networkx.algorithms.community.modularity_max
-        self.communities = community.greedy_modularity_communities(self.G)
+        try:
+            self.communities = community.greedy_modularity_communities(self.G)
+        except ZeroDivisionError:
+            print('I am lacking of data. Please provide enough data.')
+            return 0
         self.communities_dict = {}
         nodes_in_community = [list(i) for i in self.communities]
         for i in nodes_in_community:
