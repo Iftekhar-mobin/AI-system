@@ -15,8 +15,9 @@ def single_character_remover(text):
 
     return ' '.join([temp.strip(' ') for temp in collector]) + '\n'
 
-with open('jp_wiki_processed_cleaned.txt', 'rt') as infile, open('cleaned_fresh.txt', "w") as outfile:  
-     for line in infile:
+#with open('jp_wiki_processed_cleaned.txt', 'rt') as infile, open('cleaned_fresh.txt', "w") as outfile:  
+with open('mhlw_s.txt', 'rt') as infile, open('cleaned_fresh_mhlw.txt', "w") as outfile:
+    for line in infile:
          line = single_character_remover(line)
          outfile.write(line)
 
