@@ -1,0 +1,2 @@
+https://github.com/Rachnog/Deep-Trading/blob/master/simple_forecasting/processing.py
+https://medium.com/machine-learning-world/neural-networks-for-algorithmic-trading-1-2-correct-time-series-forecasting-backtesting-9776bfd9e589
