@@ -6,7 +6,7 @@ import re
 import pickle
 import pandas as pd
 #from nltk.tokenize import word_tokenize
-from make_question import making_query_collection
+from methods_collection import make_question
 
 
 def build_voc(dataset):
@@ -118,108 +118,108 @@ def sequence_wise_ranking(match_list_collection):
     return sorted(score_collection,key=lambda l:l[0], reverse=True)[:30]
 
 
-def sequence_handler(collectors, vector, query_vector):
-    vector_collections=[]
-    ids_list=[]
-    for match, ids in collectors:
-        flag = 0
-        for v, i in vector:
-            if int(i) == int(ids):
-                vector_collections.append([v, i])
-                flag = 1
-            elif flag == 1:
-                break
-    match_list_collection = []
-    for items_vector, ids in vector_collections:
-        match_list_collection.append([sequence_matcher(items_vector, query_vector),ids])
-    sequence_wise_rank = sequence_wise_ranking(match_list_collection)
-    sequence_wise_rank = get_unique_2Dlist(sequence_wise_rank)
-    return sequence_wise_rank
+# def sequence_handler(collectors, vector, query_vector):
+#     vector_collections=[]
+#     ids_list=[]
+#     for match, ids in collectors:
+#         flag = 0
+#         for v, i in vector:
+#             if int(i) == int(ids):
+#                 vector_collections.append([v, i])
+#                 flag = 1
+#             elif flag == 1:
+#                 break
+#     match_list_collection = []
+#     for items_vector, ids in vector_collections:
+#         match_list_collection.append([sequence_matcher(items_vector, query_vector),ids])
+#     sequence_wise_rank = sequence_wise_ranking(match_list_collection)
+#     sequence_wise_rank = get_unique_2Dlist(sequence_wise_rank)
+#     return sequence_wise_rank
 
-def gensim_trainer(collectors, dataset):
-    text_collections=[]
-    ids_list=[]
-    for match, ids in collectors:
-        text_collections.append(dataset["Data"][ids])
-        ranks = get_score_details_record(df, questions_samples, fast_model)
+# def gensim_trainer(collectors, dataset):
+#     text_collections=[]
+#     ids_list=[]
+#     for match, ids in collectors:
+#         text_collections.append(dataset["Data"][ids])
+#         ranks = get_score_details_record(df, questions_samples, fast_model)
+#
+#     tagged_data = [TaggedDocument(words=word_tokenize(_d.lower()), tags=[str(i)]) for i, _d in zip(ids_list, text_collections)]
+#     model = Doc2Vec(size=200, alpha=0.025, min_alpha=0.065, min_count=1, dm=1, window=10, workers=4)
+#     #Doc2Vec(dm=1, dm_mean=1, vector_size=300, window=10, negative=5, min_count=1, workers=5, alpha=0.065, min_alpha=0.065)
+#     model.build_vocab(tagged_data)
+#
+#     max_epochs = 2
+#     for epoch in range(max_epochs):
+#         print('iteration {0}'.format(epoch))
+#         model.train(tagged_data, total_examples=model.corpus_count, epochs=model.iter) # decrease the learning rate
+#         model.alpha -= 0.0002 # fix the learning rate, no decay
+#         model.min_alpha = model.alpha
+#     #model.save("d2v.model")
+#     return model
 
-    tagged_data = [TaggedDocument(words=word_tokenize(_d.lower()), tags=[str(i)]) for i, _d in zip(ids_list, text_collections)]
-    model = Doc2Vec(size=200, alpha=0.025, min_alpha=0.065, min_count=1, dm=1, window=10, workers=4)
-    #Doc2Vec(dm=1, dm_mean=1, vector_size=300, window=10, negative=5, min_count=1, workers=5, alpha=0.065, min_alpha=0.065)
-    model.build_vocab(tagged_data)
+# def custom_countvectorizer_ranking(dataset, vector, query, query_vector,
+#                                 vectorizer, gensim_active, sequence_ranking):
+#     result_collection = []
+#     for words_vector, page_id in vector:
+#         result_collection.append([return_match_length(words_vector, query_vector), page_id])
+#
+#     rank_list = rank_list_collection(result_collection, dataset)
+#     collectors = collecting_few_results(rank_list)
+#     # print("collectors", collectors)
+#
+#     if sequence_ranking is True:
+#         sequence_wise_rank = sequence_handler(collectors, vector, query_vector)
+#         sequence_wise_rank = collecting_few_results(sequence_wise_rank,2)
+#         print("sequence_wise_rank", sequence_wise_rank)
+#
+#     if gensim_active is True:
+#         model = gensim_trainer(collectors, dataset)
+#         query_vector_gensim = model.infer_vector(query.split())
+#         ranking_result_gensim = model.docvecs.most_similar([query_vector_gensim], topn=3)
+#         return ranking_result_gensim
+#     else:
+#         if sequence_ranking is True:
+#             vec, text_collections, ids_list = filtered_vector(sequence_wise_rank, vectorizer, dataset)
+#         else:
+#             vec, text_collections, ids_list = filtered_vector(collectors, vectorizer, dataset)
+#
+#         ranks = ranking_result_collection(query, text_collections, ids_list, vec)
+#         return ranks
 
-    max_epochs = 2
-    for epoch in range(max_epochs):
-        print('iteration {0}'.format(epoch))
-        model.train(tagged_data, total_examples=model.corpus_count, epochs=model.iter) # decrease the learning rate
-        model.alpha -= 0.0002 # fix the learning rate, no decay
-        model.min_alpha = model.alpha
-    #model.save("d2v.model")
-    return model
-
-def custom_countvectorizer_ranking(dataset, vector, query, query_vector,
-                                vectorizer, gensim_active, sequence_ranking):
-    result_collection = []
-    for words_vector, page_id in vector:
-        result_collection.append([return_match_length(words_vector, query_vector), page_id])
-
-    rank_list = rank_list_collection(result_collection, dataset)
-    collectors = collecting_few_results(rank_list)
-    # print("collectors", collectors)
-
-    if sequence_ranking is True:
-        sequence_wise_rank = sequence_handler(collectors, vector, query_vector)
-        sequence_wise_rank = collecting_few_results(sequence_wise_rank,2)
-        print("sequence_wise_rank", sequence_wise_rank)
-
-    if gensim_active is True:
-        model = gensim_trainer(collectors, dataset)
-        query_vector_gensim = model.infer_vector(query.split())
-        ranking_result_gensim = model.docvecs.most_similar([query_vector_gensim], topn=3)
-        return ranking_result_gensim
-    else:
-        if sequence_ranking is True:
-            vec, text_collections, ids_list = filtered_vector(sequence_wise_rank, vectorizer, dataset)
-        else:
-            vec, text_collections, ids_list = filtered_vector(collectors, vectorizer, dataset)
-
-        ranks = ranking_result_collection(query, text_collections, ids_list, vec)
-        return ranks
-
-def get_score_details_record(dataset, questions_samples, vectorizer, vector,
-                             word_ids, sequence_ranking, gensim_active=False):
-    sample_count = 0
-    sum_score = 0
-    container = []
-
-    for index, col in questions_samples.iterrows():
-        query = str(col['Question'])
-        input_vector = list(set(str(query).split()))
-        query_vector = custom_vectorizer(input_vector, word_ids)
-
-        rank_list = custom_countvectorizer_ranking(dataset, vector, query,
-                                               query_vector, vectorizer, gensim_active, sequence_ranking)
-        #print(rank_list)
-
-        page_answers = []
-        prediction_scores = []
-        for ids, score in rank_list:
-            # print(ids, score)
-            page_answers.append(ids)
-            prediction_scores.append(score)
-
-        MRR_score = mean_reciprocal_rank_score(col['PageID'], page_answers)
-        sum_score += MRR_score
-
-        container.append([MRR_score, col['PageID'], page_answers, prediction_scores, col['Question']])
-        sample_count += 1
-
-    result = pd.DataFrame(container, columns=['score', 'actual_answer', 'page_answers', 'prediction_scores',
-                                              'query'])
-    result.to_csv('performance.csv')
-    score = sum_score / sample_count
-
-    return score
+# def get_score_details_record(dataset, questions_samples, vectorizer, vector,
+#                              word_ids, sequence_ranking, gensim_active=False):
+#     sample_count = 0
+#     sum_score = 0
+#     container = []
+#
+#     for index, col in questions_samples.iterrows():
+#         query = str(col['Question'])
+#         input_vector = list(set(str(query).split()))
+#         query_vector = custom_vectorizer(input_vector, word_ids)
+#
+#         rank_list = custom_countvectorizer_ranking(dataset, vector, query,
+#                                                query_vector, vectorizer, gensim_active, sequence_ranking)
+#         #print(rank_list)
+#
+#         page_answers = []
+#         prediction_scores = []
+#         for ids, score in rank_list:
+#             # print(ids, score)
+#             page_answers.append(ids)
+#             prediction_scores.append(score)
+#
+#         MRR_score = mean_reciprocal_rank_score(col['PageID'], page_answers)
+#         sum_score += MRR_score
+#
+#         container.append([MRR_score, col['PageID'], page_answers, prediction_scores, col['Question']])
+#         sample_count += 1
+#
+#     result = pd.DataFrame(container, columns=['score', 'actual_answer', 'page_answers', 'prediction_scores',
+#                                               'query'])
+#     result.to_csv('performance.csv')
+#     score = sum_score / sample_count
+#
+#     return score
 
 ###################  For Seq_CountVectorizer ##########################
 
@@ -235,29 +235,29 @@ def converting_vector(collectors, vectorizer, dataset):
     vec = vectorizer.fit(text_collections)
     return vec, text_collections, ids_list
 
-def seq_countvec_main(questions_samples, corpus_per_page, vectorizer, dataset):
-    sample_count = 0
-    sum_score = 0
-    container = []
-    for index, col in questions_samples.iterrows():
-        query = str(col['Question'])
-        question_parts = making_query_collection(query)
-        collector = sequence_searcher(corpus_per_page, question_parts)
-    #     vec, text_collections, ids_list = converting_vector(collector, vectorizer, dataset)
-    #     rank_list = ranking_result_collection(query, text_collections, ids_list, vec)
-    #
-    #     page_answers = []
-    #     prediction_scores = []
-    #     for ids, score in rank_list:
-    #         page_answers.append(ids)
-    #         prediction_scores.append(score)
-    #     MRR_score = mean_reciprocal_rank_score(col['PageID'], page_answers)
-    #     sum_score += MRR_score
-    #     container.append([MRR_score, col['PageID'], page_answers, prediction_scores, col['Question']])
-    #     sample_count += 1
-    #
-    # result = pd.DataFrame(container, columns=['score', 'actual_answer',
-    # 'page_answers', 'prediction_scores', 'query'])
-    # result.to_csv('seq_CountTFIDFVectorizer_performance.csv')
-    # score = sum_score/sample_count
-    return score
+# def seq_countvec_main(questions_samples, corpus_per_page, vectorizer, dataset):
+#     sample_count = 0
+#     sum_score = 0
+#     container = []
+#     for index, col in questions_samples.iterrows():
+#         query = str(col['Question'])
+#         question_parts = making_query_collection(query)
+#         collector = sequence_searcher(corpus_per_page, question_parts)
+#     #     vec, text_collections, ids_list = converting_vector(collector, vectorizer, dataset)
+#     #     rank_list = ranking_result_collection(query, text_collections, ids_list, vec)
+#     #
+#     #     page_answers = []
+#     #     prediction_scores = []
+#     #     for ids, score in rank_list:
+#     #         page_answers.append(ids)
+#     #         prediction_scores.append(score)
+#     #     MRR_score = mean_reciprocal_rank_score(col['PageID'], page_answers)
+#     #     sum_score += MRR_score
+#     #     container.append([MRR_score, col['PageID'], page_answers, prediction_scores, col['Question']])
+#     #     sample_count += 1
+#     #
+#     # result = pd.DataFrame(container, columns=['score', 'actual_answer',
+#     # 'page_answers', 'prediction_scores', 'query'])
+#     # result.to_csv('seq_CountTFIDFVectorizer_performance.csv')
+#     # score = sum_score/sample_count
+#     return score
