@@ -12,6 +12,7 @@ class MNIST_Sequence(object):
         self.images, self.labels = self.dataset.load()
         self.label_map = [[] for i in range(10)]
         self.__generate_label_map()
+        print('Map Loaded')
 
     def __calculate_uniform_spacing(self, size_sequence, minimum_spacing, maximum_spacing,
                                     total_width, image_width=28):
@@ -50,11 +51,19 @@ class MNIST_Sequence(object):
         # spacing = np.ones(image_height * allowed_spacing,
         #                   dtype='float32').reshape(image_height, allowed_spacing)
         spacing = np.ones(image_height * allowed_spacing, dtype='float32').reshape(allowed_spacing, image_height)
-        random_label_number = self.__select_random_label(sequence[0])
-        image = self.images[random_label_number]
-        for i in range(1, sequence_length):
-            if i < sequence_length:
-                image = np.vstack((image, spacing))
+        whole_image = ''
+        for i in range(sequence_length):
             random_label_number = self.__select_random_label(sequence[i])
-            image = np.vstack((image, self.images[random_label_number]))
-        return image
+            if i < 1:
+                dataset_image = self.images[random_label_number]
+                whole_image = np.vstack((dataset_image, spacing))
+            elif i < sequence_length-1:
+                dataset_image = self.images[random_label_number]
+                temp_image = np.vstack((dataset_image, spacing))
+                whole_image = np.vstack((whole_image, temp_image))
+            else:
+                dataset_image = self.images[random_label_number]
+                whole_image = np.vstack((whole_image, dataset_image))
+            # random_label_number = self.__select_random_label(sequence[i])
+            # image = np.vstack((image, self.images[random_label_number]))
+        return whole_image
