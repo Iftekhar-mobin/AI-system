@@ -261,15 +261,6 @@ def augmented_data_generator(
         plt.show()
         break
 
-    augmented_data = []
-num_augmented = 0
-for X_batch, y_batch in datagen.flow(train_data, train_labels, batch_size=batch_size, shuffle=False):
-    augmented_data.append(X_batch)
-    num_augmented += batch_size
-    if num_augmented == train_data.shape[0]:
-        break
-augmented_data = np.concatenate(augmented_data)
-np.save(...)
 
 def plot_samples(x_train, y_train):
     num = 10
