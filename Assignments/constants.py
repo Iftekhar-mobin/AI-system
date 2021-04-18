@@ -8,17 +8,10 @@ LABEL_PATH = os.path.join(DATASET_DIR, LABEL_FILE)
 IMAGE_SAVE_DIR = os.path.join(os.getcwd(), 'aug_gen_data')
 SPACING_RANGE = {'min': 0, 'max': 10}
 GEN_DATASET_NAME = 'augmented_data'
-
-# spacing = 10
-# all_images = x
-# image_height = 28
-# input_sequence = [3, 8, 9, 1, 5]
-#
-#
-# num_samples = 7
-# seq_len = 5
-# dataset_images = x
-# label_idex_mapping = label_mapping(y)
-# spacing = 10
+AUGMENTED_KERAS_GEN_DATA = 'keras_augmented_data'
+KERAS_SAVE_DIR = os.path.join(os.getcwd(), 'keras_data')
+KERAS_AUG_HOR_IMAGES = os.path.join(os.getcwd(), 'keras_hor_images')
+IMAGE_HEIGHT = 28
+IMAGE_WIDTH = 28
 
 

@@ -2,13 +2,41 @@ from constants import IMAGE_PATH, \
     LABEL_PATH, \
     IMAGE_SAVE_DIR, \
     SPACING_RANGE, \
-    GEN_DATASET_NAME
+    GEN_DATASET_NAME, \
+    AUGMENTED_KERAS_GEN_DATA, \
+    KERAS_SAVE_DIR, \
+    IMAGE_HEIGHT, \
+    IMAGE_WIDTH, \
+    KERAS_AUG_HOR_IMAGES
 from methods import load_data, \
     label_mapping, \
     generate_image, \
     save_image, \
     random_seq_generator, \
-    augmented_data_generator
+    augmented_data_generator, \
+    plot_samples, \
+    load_generated_data
+
+
+class AugmentedSeqGen:
+    def __init__(self):
+        # load keras generated augmented dataset
+        aug_keras_dataset = load_generated_data(KERAS_SAVE_DIR, AUGMENTED_KERAS_GEN_DATA)
+        print('[INFO] Data is loaded from saved directory:', KERAS_SAVE_DIR)
+        self.images = aug_keras_dataset['arr_0']
+        self.labels = aug_keras_dataset['arr_1']
+
+    def visualize_generated_aug_dataset(self):
+        print('[INFO] Data is loaded from saved directory:', KERAS_SAVE_DIR)
+        plot_samples(self.images, self.labels)
+
+    def generate_random_sequence_with_keras_data(self, num_samples, seq_len, space_range=SPACING_RANGE, image_width=100):
+        dataset = self.images.reshape(self.images.shape[0], IMAGE_HEIGHT, IMAGE_WIDTH)
+
+        print('[INFO] Horizontal Image is generating from keras augmented data...')
+        # Generate Horizontal image with optimal spacing
+        random_seq_generator(num_samples, seq_len, dataset, label_mapping(self.labels),
+                             space_range, image_width, KERAS_AUG_HOR_IMAGES, GEN_DATASET_NAME)
 
 
 class SeqGen:
@@ -29,6 +57,7 @@ class SeqGen:
                              space_range, image_width, IMAGE_SAVE_DIR, GEN_DATASET_NAME)
 
     def augment_dataset(self,
+                        num_of_data_to_save=10000,
                         zca_whitening=False,
                         rotation_range=10,
                         width_shift_range=0.2,
@@ -36,9 +65,11 @@ class SeqGen:
                         shear_range=0.2,
                         ):
         augmented_data_generator(
+            num_of_data_to_save,
             self.dataset_images,
             self.labels,
-            IMAGE_SAVE_DIR,
+            KERAS_SAVE_DIR,
+            AUGMENTED_KERAS_GEN_DATA,
             f_center=False,
             s_center=False,
             f_std_normalization=False,

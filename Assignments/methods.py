@@ -37,15 +37,15 @@ def _space_generator(length_input_sequence, image_width, image_height, spacing_r
     auto_space = (image_width - image_height * number_of_digits) / number_of_space
     if auto_space < 0:
         auto_space = 1
-        print('Image_width is too short to fit (digits+space), Spacing is selected 1px')
+        print('[INFO] Image_width is too short to fit (digits+space), Spacing is selected 1px')
         return auto_space
     elif spacing_range['min'] <= auto_space <= spacing_range['max']:
         return int(auto_space)
     else:
-        print(str(int(auto_space)) + 'px space is needed to fit given width', image_width,
+        print('[INFO] ' + str(int(auto_space)) + 'px space is needed to fit given width', image_width,
               ', allowed:', spacing_range)
         auto_space = random.randint(spacing_range['min'], spacing_range['max'])
-        print('Choosing random space: ', str(auto_space) + 'px')
+        print('[INFO] Choosing random space: ', str(auto_space) + 'px')
         return auto_space
 
 
@@ -87,23 +87,24 @@ def save_image(image_array, input_sequence, save_dir):
     if image.mode != 'RGB':
         image = image.convert('RGB')
     image.save(os.path.join(save_dir, img_name + ".png"))
-    print(img_name + '.png is saved in', save_dir)
+    print('[INFO] ' + img_name + '.png is saved in', save_dir)
 
 
 def save_array(pixels_map, labels, save_dir, dataset_name):
-    # for separated saving
-    # np.save('./pixel_mapping', inputs)
-    # np.save('./label_mapping', labels)
+    if not os.path.exists(save_dir):
+        os.mkdir(save_dir)
     file_name = os.path.join(save_dir, dataset_name)
     np.savez(file_name, pixels_map, labels)
-    print('Array is saved for future use in:', file_name + '.npz')
+    print('[INFO] Array is saved for future use in:', file_name + '.npz')
 
 
 def load_generated_data(path, dataset_name):
-    dataset = os.path.join(path, dataset_name)
-    # generated_data = load_generated_data(os.getcwd(), 'generated_dataset.npz')
-    # generated_data['arr_1']
-    return np.load(dataset)
+    dataset = os.path.join(path, dataset_name + '.npz')
+    if os.path.exists(dataset):
+        # generated_data['arr_0'] generated_data['arr_1']
+        return np.load(dataset)
+    else:
+        print('[INFO] Keras augmented dataset is not generated yet ...')
 
 
 def random_seq_generator(num_samples, seq_len, dataset_images, label_maps,
@@ -120,10 +121,31 @@ def random_seq_generator(num_samples, seq_len, dataset_images, label_maps,
     save_array(pixel_map, labels, save_dir, to_save_name)
 
 
+def _show_and_save_samples(generator, image_dataset, labels, save_dir):
+    print("[INFO] generating sample images...")
+    for x_batch, _ in generator.flow(
+            image_dataset,
+            labels,
+            batch_size=9,
+            save_to_dir=save_dir,
+            save_prefix='aug',
+            save_format='png'
+    ):
+
+        # create a grid of 3x3 images
+        for i in range(0, 9):
+            plt.subplot(330 + 1 + i)
+            plt.imshow(x_batch[i].reshape(28, 28), cmap=plt.get_cmap('gray'))
+        plt.show()
+        break
+
+
 def augmented_data_generator(
+        num_of_data_to_save,
         image_dataset,
         labels,
         save_dir,
+        saved_file_name,
         f_center=False,
         s_center=False,
         f_std_normalization=False,
@@ -243,23 +265,21 @@ def augmented_data_generator(
     )
     generator.fit(image_dataset)
 
-    augment_data = []
-    print("[INFO] generating images...")
-    for x_batch, _y in generator.flow(
-            image_dataset,
-            labels,
-            batch_size=9,
-            save_to_dir=save_dir,
-            save_prefix='aug',
-            save_format='png'
-    ):
-        augment_data.append(x_batch)
-        # create a grid of 3x3 images
-        for i in range(0, 9):
-            plt.subplot(330 + 1 + i)
-            plt.imshow(x_batch[i].reshape(28, 28), cmap=plt.get_cmap('gray'))
-        plt.show()
-        break
+    augment_x = []
+    batch_size = 1
+    augment_y = []
+    for x_batch, y_batch in generator.flow(image_dataset, labels, batch_size=batch_size):
+        # for debug only
+        # plt.imshow(x_batch.reshape(28, 28), cmap=plt.get_cmap('gray'))
+        # plt.show()
+        # exit()
+        augment_x.append(x_batch)
+        augment_y.append(y_batch[0])
+        batch_size += 1
+        if batch_size == num_of_data_to_save + 1:
+            break
+    save_array(np.concatenate(augment_x), np.array(augment_y), save_dir, saved_file_name)
+    _show_and_save_samples(generator, image_dataset, np.array(augment_y), save_dir)
 
 
 def plot_samples(x_train, y_train):
