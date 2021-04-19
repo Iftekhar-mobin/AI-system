@@ -15,7 +15,8 @@ from methods import load_data, \
     random_seq_generator, \
     augmented_data_generator, \
     plot_samples, \
-    load_generated_data
+    load_generated_data, \
+    normalize_data
 
 
 class AugmentedSeqGen:
@@ -30,10 +31,13 @@ class AugmentedSeqGen:
         print('[INFO] Data is loaded from saved directory:', KERAS_SAVE_DIR)
         plot_samples(self.images, self.labels)
 
-    def generate_random_sequence_with_keras_data(self, num_samples, seq_len, space_range=SPACING_RANGE, image_width=100):
+    # Generate Horizontal image with optimal spacing
+    def generate_random_sequence_with_keras_data(self, see_image, num_samples, seq_len, space_range=SPACING_RANGE, image_width=100):
         print('[INFO] Horizontal Image is generating from keras augmented data...')
-        # Generate Horizontal image with optimal spacing
-        random_seq_generator(num_samples, seq_len, self.images, label_mapping(self.labels),
+        # for normalization
+        normalized_data = normalize_data(self.images, see_image=see_image)
+
+        random_seq_generator(num_samples, seq_len, normalized_data, label_mapping(self.labels),
                              space_range, image_width, KERAS_AUG_HOR_IMAGES, GEN_DATASET_NAME)
 
 

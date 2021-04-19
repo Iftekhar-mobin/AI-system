@@ -5,6 +5,25 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 from keras.preprocessing.image import ImageDataGenerator
+from sklearn.preprocessing import MinMaxScaler
+
+
+# Normalize dataset between 0~1
+def normalize_data(dataset, see_image=True):
+    if see_image:
+        dataset *= (255.0 / dataset.max())
+        return dataset
+    else:
+        # reshaping to fit into MinMaxScaler 3D=>2D=>3D
+        sample_size, x, y = dataset.shape
+        train_dataset = dataset.reshape((sample_size, x * y))
+
+        scale = MinMaxScaler()
+        scale.fit(train_dataset)
+        dataset = scale.transform(train_dataset)
+        dataset = dataset.reshape(sample_size, x, y)
+
+        return dataset
 
 
 # http://rasbt.github.io/mlxtend/user_guide/data/loadlocal_mnist/
