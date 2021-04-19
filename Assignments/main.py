@@ -23,7 +23,7 @@ class AugmentedSeqGen:
         # load keras generated augmented dataset
         aug_keras_dataset = load_generated_data(KERAS_SAVE_DIR, AUGMENTED_KERAS_GEN_DATA)
         print('[INFO] Data is loaded from saved directory:', KERAS_SAVE_DIR)
-        self.images = aug_keras_dataset['arr_0']
+        self.images = aug_keras_dataset['arr_0'].reshape(aug_keras_dataset['arr_0'].shape[0], IMAGE_HEIGHT, IMAGE_WIDTH)
         self.labels = aug_keras_dataset['arr_1']
 
     def visualize_generated_aug_dataset(self):
@@ -31,11 +31,9 @@ class AugmentedSeqGen:
         plot_samples(self.images, self.labels)
 
     def generate_random_sequence_with_keras_data(self, num_samples, seq_len, space_range=SPACING_RANGE, image_width=100):
-        dataset = self.images.reshape(self.images.shape[0], IMAGE_HEIGHT, IMAGE_WIDTH)
-
         print('[INFO] Horizontal Image is generating from keras augmented data...')
         # Generate Horizontal image with optimal spacing
-        random_seq_generator(num_samples, seq_len, dataset, label_mapping(self.labels),
+        random_seq_generator(num_samples, seq_len, self.images, label_mapping(self.labels),
                              space_range, image_width, KERAS_AUG_HOR_IMAGES, GEN_DATASET_NAME)
 
 

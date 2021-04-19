@@ -1,6 +1,6 @@
 from main import SeqGen, AugmentedSeqGen
 
-# initialization for data+library loading and mapping
+# # initialization for data+library loading and mapping
 # driver = SeqGen()
 #
 # # To generate only one sequence
@@ -27,8 +27,8 @@ from main import SeqGen, AugmentedSeqGen
 #     height_shift_range=0.2,
 #     shear_range=0.2,
 # )
-#
-# # visualize generated augmented dataset to see label mapping is ok
+
+# visualize generated augmented dataset to see label mapping is ok
 augmented = AugmentedSeqGen()
 # augmented.visualize_generated_aug_dataset()
 
