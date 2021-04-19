@@ -146,7 +146,7 @@ augmented.generate_random_sequence_with_keras_data(
 
 where:
  
-- `see_image` False = data normalization 0~1 range. Hence, image is not visible. True = 0~255  
+- `see_image` False data is normalized [0-1] range. Hence, image is not visible. if True normalized to [0-255]  
 - `space_range` is a dict format containing the minimum and maximum spacing (in pixels) between digits. 
 - `image_width` specifies the width of the image in pixels.
 - `num_samples` is the number of samples of image dataset to generate from/to dataset.
