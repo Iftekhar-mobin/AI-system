@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+ name: kubia
+spec:
+ template:
+   metadata:
+     name: kubia-pod
+   spec:
+     containers:
+     - name: kubia-container
+       image: kubia:latest
+       imagePullPolicy: Never
+     restartPolicy: Never
+
