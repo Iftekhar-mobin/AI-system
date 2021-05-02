@@ -1,0 +1,70 @@
+How To Build Your First GitLab CI/CD Pipeline
+A guide to continuously integrating and deploying your Dockerised Node.js app to AWS Elastic Beanstalk with GitLab
+
+
+Introduction
+This piece has two goals:
+To be a standalone guide to building a CI/CD pipeline with GitLab
+To form part of a larger series of articles which compare various CI/CD services
+The repository hosting the project tested and deployed with GitLab can be found here. It’s a small Node/Express application that’s Dockerised and has a single test. I recommend you clone this application and push it up to your own GitHub account, so you can build a pipeline while reading this guide.
+Read my other CI/CD guides with this same application below:
+
+How To Build Your First Travis CI/CD Pipeline
+A guide to continuously integrating and deploying your Dockerised Node app to AWS Elastic Beanstalk with Travis
+
+How To Build Your First AWS CodePipeline CI/CD Pipeline
+A guide to continuously integrating and deploying your Dockerised Node.js app to AWS Elastic Beanstalk with AWS…
+medium.com
+
+The article comparing these services:
+The Results of a Comparison Between 5 CI/CD Services
+AWS, Buddy, TravisCI, CircleCI, and GitLab
+medium.com
+
+Pipeline Overview
+A diagram showing the steps followed in our CI/CD pipeline can be seen below. Notice how we use Docker Hub to store our Docker images and Elastic Beanstalk to pull and run those images:
+
+Preliminary Steps
+For this piece, we need to create an AWS user so the GitLab can programatically access Elastic Beanstalk. See my guide on how to do this: (you’ll be provided with AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY variables):
+How to create an AWS User for a CI /CD service to use when deploying to Elastic Beanstalk
+Often when building CI/CD pipelines, we will need to create an AWS User so that CI/CD services can programatically…
+medium.com
+
+Next, we need to create an application on Elastic Beanstalk which GitLab can deploy to. My guide (below) explains how to do this
+How to create an Elastic Beanstalk application
+Note: In my blog posts I frequently create sample applications on Elastic Beanstalk. Rather than repeat myself each…
+medium.com
+
+The final step is the creation of a Docker Hub repository. Again, see my guide here on how to do this:
+How to create a Docker Hub repository:
+Note: In my blog posts I frequently create sample repositories on Docker Hub. Rather than repeat myself each time, I…
+medium.com
+
+Setting Up a GitLab Pipeline:
+First, head over to https://about.gitlab.com/, and sign in.
+
+If this is your first time using GitLab, you’ll see the following screen. Click “Create a project.”
+
+Next click the CI/CD for external repositories tab, and connect to GitHub.
+
+You’ll be prompted for a personal access token from GitHub with repo access. To get a token, follow this short guide.
+
+Next, connect your repository:
+
+You should then see a dashboard with your project details:
+
+The next step is to add the environment variables. Click Settings on the side bar and then click CI/CD on the pop-up.
+
+Scroll down, and add your AWS and Docker Hub credentials (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, DOCKER_USER, and DOCKER_PASS).
+
+The next step is to move the .gitlab-ci.ymlfile to the root of your directory. If you look in the GitHub repository, you will see the following file:
+Let’s break down what’s happening during this build’s execution:
+The base image is a Node Docker container.
+The node_modules are cached.
+The packages are installed.
+The tests are run.
+Next, the Docker image is built and pushed to Docker Hub with the DOCKER_USER and DOCKER_PASS environment variables. Remember to change the repository to the one you created.
+The Elastic Beanstalk CLI tool is installed.
+The CLI is used to deploy the app to Elastic Beanstalk with eb deploy . This command works as we have already been authenticated invisibly by GitLab with the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables. Note how we have to specify the environment name in this command.
+We are finally ready to go, so push up a small irrelevant commit, and, with a little luck, your project should test, build, and deploy successfully:
+
