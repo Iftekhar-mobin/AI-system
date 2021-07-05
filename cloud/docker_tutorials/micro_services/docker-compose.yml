@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  spelling_check:
+    build:
+      context: ./spell_checker
+      dockerfile: Dockerfile
+    volumes:
+      - ./spell_checker:/usr/src/app
+      - /home/iftekhar/mywork/amie_datadir/data/:/home/iftekhar/mywork/amie_datadir/data/
+    ports:
+      - "80:8000"
+
+  recommender:
+    build:
+      context: ./recommendation
+      dockerfile: Dockerfile
+    volumes:
+      - ./recommendation:/usr/src/app
+      - /home/iftekhar/mywork/amie_datadir/data/:/home/iftekhar/mywork/amie_datadir/data/
+      - /home/iftekhar/mywork/amie_datadir/model/:/home/iftekhar/mywork/amie_datadir/model/
+    ports:
+      - "81:8000"
